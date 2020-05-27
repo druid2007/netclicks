@@ -2,6 +2,8 @@ const leftMenu = document.querySelector('.left-menu');
 const hamburger = document.querySelector('.hamburger');
 const tvShowList = document.querySelector('.tv-shows__list');
 const modal = document.querySelector('.modal');
+const apiKey = '6365032ae17ecff7a808bf60eccd8114';
+const apiReq = 'https://api.themoviedb.org/3/movie/550?api_key=6365032ae17ecff7a808bf60eccd8114'
 
 // открытие закрытие меню
 hamburger.addEventListener('click', () => {
@@ -113,7 +115,7 @@ const renderCard = response => {
         const posterIMG = poster ?  IMG_URL + poster : 'img/no-poster.jpg';
         const backdropIMG = backdrop ? IMG_URL + backdrop :'img/no-poster.jpg' ;
         // const voteElem = '';
-        
+
         hide = '';
         if (vote == 0) {hide = 'hide'}
 
