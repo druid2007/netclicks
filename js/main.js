@@ -2,6 +2,7 @@ const leftMenu = document.querySelector('.left-menu');
 const hamburger = document.querySelector('.hamburger');
 const tvShowList = document.querySelector('.tv-shows__list');
 const modal = document.querySelector('.modal');
+const IMG_URL = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2'
 const apiKey = '6365032ae17ecff7a808bf60eccd8114';
 const apiReq = 'https://api.themoviedb.org/3/movie/550?api_key=6365032ae17ecff7a808bf60eccd8114'
 
@@ -82,7 +83,6 @@ modal.addEventListener('click', event => {
     }
 })
 
-const IMG_URL = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2'
 
 const DBService = class{
     getData = async (url) => {
