@@ -112,7 +112,8 @@ const renderCard = response => {
 
         const posterIMG = poster ?  IMG_URL + poster : 'img/no-poster.jpg';
         const backdropIMG = backdrop ? IMG_URL + backdrop :'img/no-poster.jpg' ;
-        const voteElem = '';
+        // const voteElem = '';
+        
         hide = '';
         if (vote == 0) {hide = 'hide'}
 
