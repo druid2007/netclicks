@@ -2,6 +2,7 @@ const leftMenu = document.querySelector('.left-menu');
 const hamburger = document.querySelector('.hamburger');
 const tvShowList = document.querySelector('.tv-shows__list');
 const modal = document.querySelector('.modal');
+const poster = document.querySelector('.poster');
 const tvShows = document.querySelector('.tv-shows');
 const tvCardImg = modal.querySelector('.tv-card__img');
 const modalTitle = document.querySelector('.modal__title');
@@ -73,6 +74,9 @@ tvShowList.addEventListener('mouseout', changeImage);
 //ОТкрытие модального окна
 tvShowList.addEventListener('click', event =>{
     event.preventDefault();
+    
+    tvShows.append(loading);
+
     const target = event.target;
     // console.log(target);
     const card = target.closest('.tv-card');
@@ -83,9 +87,12 @@ tvShowList.addEventListener('click', event =>{
             .then(res => {
                 // console.log(res);
                 // console.log(tvCardImg);
-                
-                tvCardImg.src = IMG_URL + res.poster_path;
+                if (res.poster_path) {
+                tvCardImg.src =  IMG_URL + res.poster_path;                
                 tvCardImg.alt = res.name;
+                poster.classList.remove('hide')
+                } else {poster.classList.add('hide')}
+
                 modalTitle.textContent = res.name;
                 genresList.textContent = '';
                 for (const item of res.genres) {
@@ -98,8 +105,9 @@ tvShowList.addEventListener('click', event =>{
                 
             })
             .then(() => {
+                loading.remove();
                 document.body.style.overflow = 'hidden';
-                        modal.classList.remove('hide');
+                modal.classList.remove('hide');
 
             })
 
@@ -157,10 +165,11 @@ const DBService = class{
 
 // Выводим карточку сериала
 const renderCard = response => {
-    // console.log(response);
+    console.log(response);
 
     tvShowList.textContent = '';
 
+    if (response.total_results != 0){
     response.results.forEach(item => {
         // console.log(item);
         const {
@@ -195,7 +204,12 @@ const renderCard = response => {
         // tvShowList.insertAdjacentElement('afterbegin', card);
         // console.log(card);
     });
-    
+    } else {
+        const answer = document.createElement('h3');
+        answer.textContent = 'Ничего не найдено';
+        tvShowList.append(answer);
+        loading.remove();
+    }
 }
 
 
@@ -215,6 +229,6 @@ searchForm.addEventListener('submit', event => {
 
 
 {
-// tvShows.append(loading);    
+    // tvShows.append(loading);    
 // new DBService().getTestData().then(renderCard);
 }
